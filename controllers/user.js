@@ -1,9 +1,9 @@
-const User = require('../modelo/User')
+const user = require('../modelo/user')
 
-const getAllUsers = async(req,res)=>{
+const getAllusers = async(req,res)=>{
     try{
 
-        const users = await User.find({});
+        const users = await user.find({});
         if(users.length===0){
             res.status(500).json({status:"Error",message:"Could not get all usesr"})
         }
@@ -14,11 +14,11 @@ const getAllUsers = async(req,res)=>{
     }
 }
 
-const getUser = async(req,res)=>{
+const getuser = async(req,res)=>{
     try{
 
         const{id:userId} = req.params;
-        const user = await User.find({_id:userId});
+        const user = await user.find({_id:userId});
         if(!user){
             res.status(500).json({status:"Error",message:`Could not get user with id ${user}`})
         }
@@ -29,9 +29,9 @@ const getUser = async(req,res)=>{
     }
 }
 
-const saveUser = async(req,res) =>{
+const saveuser = async(req,res) =>{
     try{
-        const user = await User.create(req.body)
+        const user = await user.create(req.body)
 
         if(!user){
             res
@@ -48,34 +48,34 @@ const saveUser = async(req,res) =>{
     }
 }
 
-const updateUser = async(req,res)=>{
+const updateuser = async(req,res)=>{
     try{
 
         const{id:userId} = req.params;
-        const user = await User.findByIdAndUpdate({_id:userId},req.body);
+        const user = await user.findByIdAndUpdate({_id:userId},req.body);
         if(!user){
             res.status(500).json({status:"Error",message:`Could not update user with id ${user}`})
         }
-        res.status(200).json({status:"200",message:"User sucefully updated"})
+        res.status(200).json({status:"200",message:"user sucefully updated"})
     }
     catch(error){
         console.log(error)
     }
 }
 
-const deleteUser = async(req,res)=>{
+const deleteuser = async(req,res)=>{
     try{
 
         const{id:userId} = req.params;
-        const user = await User.findByIdAndDelete({_id:userId},req.body);
+        const user = await user.findByIdAndDelete({_id:userId},req.body);
         if(!user){
             res.status(500).json({status:"Error",message:`Could not delete user with id ${user}`})
         }
-        res.status(200).json({status:"200",message:"User sucefully deleted"})
+        res.status(200).json({status:"200",message:"user sucefully deleted"})
     }
     catch(error){
         console.log(error)
     }
 }
 
-module.exports = {saveUser,getAllUsers,getUser,updateUser,deleteUser}
+module.exports = {saveuser,getAllusers,getuser,updateuser,deleteuser}

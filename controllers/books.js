@@ -1,11 +1,10 @@
 const { json } = require('express');
-const Book = require('../modelo/Book');
-const Books =  require('../modelo/Book')
+const books =  require('../modelo/book')
 
-const getAllBooks = async(req,res)=>{
+const getAllbooks = async(req,res)=>{
     try{
 
-        const books = await Books.find({})
+        const books = await books.find({})
         console.log(books);
 
         if(books.length==0){
@@ -29,7 +28,7 @@ const saveBook = async(req,res)=>{
 
     try{
         console.log(req.body)
-        const book = await Books.create(req.body)
+        const book = await books.create(req.body)
         if(!book){
             res
             .status(500)
@@ -52,7 +51,7 @@ const updateBook = async(req,res)=>{
 
     try{
         const { id: bookID } = req.params;
-        const book = await Books.findOneAndUpdate({_id:bookID},req.body)
+        const book = await books.findOneAndUpdate({_id:bookID},req.body)
         if(!book){
             res
             .status(500)
@@ -73,7 +72,7 @@ const deleteBook = async(req,res) =>{
 
     try{
         const { id: bookID } = req.params;
-        const book = await Books.findByIdAndDelete({_id:bookID},req.body)
+        const book = await books.findByIdAndDelete({_id:bookID},req.body)
         if(!book){
             res
             .status(500)
@@ -91,4 +90,4 @@ const deleteBook = async(req,res) =>{
 
 }
 
-module.exports = {getAllBooks,saveBook, updateBook, deleteBook}
+module.exports = {getAllbooks,saveBook, updateBook, deleteBook}
