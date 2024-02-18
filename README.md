@@ -7,7 +7,7 @@ This  Library API Management System is a straightforward yet robust project desi
 
  Create a .env file in the root directory of your project. Inside this file, add the following line to reference your Node.js instance database URL:
 
-   # DATABASE_URL=<your_database_url_here>
+   ### DATABASE_URL=<your_database_url_here>
    
 # License
 Free for share, use and study.
