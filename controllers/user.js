@@ -19,10 +19,10 @@ const getUser = async(req,res)=>{
 
         const{id:userId} = req.params;
         const user = await User.find({_id:userId});
-        if(!user){
-            res.status(500).json({status:"Error",message:`Could not get user with id ${user}`})
+        if(user.length==0){
+            res.status(500).json({status:"Error",message:`Could not get user with id ${userId}`})
         }
-        res.status(200).json({status:"200",users:JSON.stringify(user)})
+        res.status(200).json({status:"200",user:user})
     }
     catch(error){
         console.log(error)

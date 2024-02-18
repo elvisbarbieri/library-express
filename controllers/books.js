@@ -6,7 +6,6 @@ const getAllBooks = async(req,res)=>{
     try{
 
         const books = await Books.find({})
-        console.log(books);
 
         if(books.length==0){
             res
@@ -16,7 +15,7 @@ const getAllBooks = async(req,res)=>{
 
         res
         .status(200)
-        .json({status:"SUCCESS",books:JSON.stringify(books)})
+        .json({status:"SUCCESS",books:books})
     }
     catch(exception){
 
@@ -38,7 +37,7 @@ const saveBook = async(req,res)=>{
 
         res
         .status(200)
-        .json({status:"SUCCESS",book:JSON.stringify(book)})
+        .json({status:"SUCCESS",book:book})
 
     }
     catch(error){
@@ -69,11 +68,32 @@ const updateBook = async(req,res)=>{
     }
 }
 
+const getABook = async(req,res)=>{
+
+    try{
+        const { id: bookID } = req.params;
+        const book = await Books.find({_id:bookID})
+        if(book.length==0){
+            res
+            .status(500)
+            .json({status:"ERROR",message:`We could not find a book with id ${book}`})
+        }
+
+        res
+        .status(200)
+        .json({status:"SUCCESS",book:book})
+
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
 const deleteBook = async(req,res) =>{
 
     try{
         const { id: bookID } = req.params;
-        const book = await Books.findByIdAndDelete({_id:bookID},req.body)
+        const book = await Books.findByIdAndDelete({_id:bookID})
         if(!book){
             res
             .status(500)
@@ -91,4 +111,4 @@ const deleteBook = async(req,res) =>{
 
 }
 
-module.exports = {getAllBooks,saveBook, updateBook, deleteBook}
+module.exports = {getAllBooks,saveBook, updateBook, deleteBook,getABook}
