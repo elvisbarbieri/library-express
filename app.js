@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bookRoute = require('./routers/books')
+const borrowBooksRoute = require('./routers/borrowed_books')
 const userRoute = require('./routers/user')
 const connectDB = require('./db/connect')
 require('dotenv').config()
@@ -10,7 +11,7 @@ const PORT = 5000;
 app.use(express.json());
 app.use("/api/v1/users",userRoute);
 app.use("/api/v1/books",bookRoute);
-
+app.use("/api/v1/borrowed_books",borrowBooksRoute);
 
 
 // app.post("/api/v1/books",(req,res)=>{
